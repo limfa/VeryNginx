@@ -22,6 +22,8 @@ _M.configs["admin"] = {
     { ["user"] = "verynginx", ["password"] = "verynginx", ["enable"] = true}
 }
 
+_M.configs['real_ip_headers'] = {'http_x_forwarded_for'}
+
 _M.configs['matcher'] = {
     ["all_request"] = {},
     ["attack_sql_0"] = { 

@@ -5,6 +5,7 @@
 -- @Disc    : test a request hit a matcher or not
 
 local cookie = require "cookie"
+local util = require "util"
 
 local _M = {}
 
@@ -104,7 +105,7 @@ function _M.test_uri( condition )
 end
 
 function _M.test_ip( condition )
-    local remote_addr = ngx.var.remote_addr
+    local remote_addr = util.get_ip()
     return _M.test_var( condition['operator'], condition['value'], remote_addr )
 end
 

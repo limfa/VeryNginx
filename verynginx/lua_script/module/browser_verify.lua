@@ -25,7 +25,7 @@ function _M.sign( mark )
         forwarded = ''
     end
 
-    local sign = ngx.md5( 'VN' .. ngx.var.remote_addr .. forwarded .. ua .. mark .. encrypt_seed.get_seed() )
+    local sign = ngx.md5( 'VN' .. util.get_ip() .. forwarded .. ua .. mark .. encrypt_seed.get_seed() )
     return sign 
 end
 

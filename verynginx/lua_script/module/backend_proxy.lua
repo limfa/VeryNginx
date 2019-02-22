@@ -28,7 +28,7 @@ function _M.find_node( upstream )
    
     local p = nil
     if balance_method == 'ip_hash' then
-        p =  math.fmod( ngx.crc32_short( ngx.var.remote_addr), rate_sum) + 1
+        p =  math.fmod( ngx.crc32_short( util.get_ip() ), rate_sum) + 1
     else
         p = math.random( rate_sum )
     end

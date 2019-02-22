@@ -163,6 +163,8 @@ matcher_editor.form_meta = {
                     'options':{
                         'Equal [=]':"=",
                         'Not Equal [!=]':"!=",
+                        'Match RegEx [≈]':"≈",
+                        'Not Matche RegEx [!≈]':"!≈",
                     }
                 },
                 {

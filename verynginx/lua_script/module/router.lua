@@ -20,6 +20,17 @@ _M.mime_type['.js'] = "application/x-javascript"
 _M.mime_type['.css'] = "text/css"
 _M.mime_type['.html'] = "text/html"
 
+local limit_dict = ngx.shared.frequency_limit
+local disabled_dict = ngx.shared.frequency_limit_disabled
+
+function _M.clear_frequency()
+    limit_dict:flush_all()
+    disabled_dict:flush_all()
+
+    local data = {}
+    data['ret'] = 'success'
+    return json.encode( data )
+end
 
 function _M.filter()
     local method = ngx.req.get_method()
@@ -123,6 +134,7 @@ _M.route_table = {
     { ['method'] = "GET",  ['auth']= true,  ["path"] = "/config", ['handle'] = VeryNginxConfig.report },
     { ['method'] = "POST", ['auth']= true,  ["path"] = "/config", ['handle'] = VeryNginxConfig.set },
     { ['method'] = "GET",  ['auth']= true,  ["path"] = "/loadconfig", ['handle'] = VeryNginxConfig.load_from_file },
+    { ['method'] = "POST",  ['auth']= true,  ["path"] = "/frequency/clear", ['handle'] = _M.clear_frequency },
 }
 
 

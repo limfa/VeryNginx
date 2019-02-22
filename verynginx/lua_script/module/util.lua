@@ -5,6 +5,7 @@
 -- @Disc    : some tools
 
 local json = require "json"
+local VeryNginxConfig = require "VeryNginxConfig"
 
 local _M = {}
 
@@ -62,6 +63,17 @@ function _M.get_request_args()
     end
 
     return args
+end
+
+function _M.get_ip()
+    for i,header in ipairs( VeryNginxConfig.configs["real_ip_headers"] ) do
+        local ip = ngx.var[header]
+        if ip ~= nil then
+            return ip
+        end
+    end
+
+    return ngx.var.remote_addr
 end
 
 return _M

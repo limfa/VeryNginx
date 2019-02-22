@@ -128,6 +128,17 @@ config.save_config = function(){
     });
 }
 
+config.clear_frequency = function(){
+    $.post("./frequency/clear", function(data){
+        console.log(data)
+        if(data['ret'] == 'success'){
+            dashboard.notify("clear frequency success")
+        }else{
+            dashboard.show_notice( 'warning', "failed [" + data['err'] + "].");
+        }
+    })
+}
+
 //modify: give group, index ,value
 //delete: let value = null
 //add: let index == null 
