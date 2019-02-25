@@ -1,3 +1,16 @@
+
+## add/modify features
+
+* add frequency limit disabled time
+    it can disable some time when excees frequency limit
+* add get real ip by headers
+    you want to get ip from http header, you can modify the config
+* add matcher of ip type support regrex
+* modify matcher of uri type replace "ngx.var.uri" with "ngx.var.request_uri"
+
+
+
+
 # VeryNginx
 VeryNginx is a very powerful and friendly nginx .
 
