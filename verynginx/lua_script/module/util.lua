@@ -65,15 +65,35 @@ function _M.get_request_args()
     return args
 end
 
+function _M.get_uri()
+    if ngx.ctx.real_uri == nil then
+        local uri = ngx.var.request_uri;
+        local index = string.find(uri, '?')
+        if index ~= nil then
+            uri = string.sub(uri, 0, index - 1)
+        end
+        ngx.ctx.real_uri = uri
+    end
+
+    return ngx.ctx.real_uri
+end
+
 function _M.get_ip()
-    for i,header in ipairs( VeryNginxConfig.configs["real_ip_headers"] ) do
-        local ip = ngx.var[header]
-        if ip ~= nil then
-            return ip
+    if ngx.ctx.real_ip == nil then
+        local ip
+        for i,header in ipairs( VeryNginxConfig.configs["real_ip_headers"] ) do
+            ip = ngx.var[header]
+            if ip ~= nil then
+                ngx.ctx.real_ip = ip
+                break
+            end
+        end
+        if ip == nil then
+            ngx.ctx.real_ip = ngx.var.remote_addr
         end
     end
 
-    return ngx.var.remote_addr
+    return ngx.ctx.real_ip
 end
 
 return _M

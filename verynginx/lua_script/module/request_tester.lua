@@ -100,7 +100,7 @@ function _M.test_many_var( var_table, condition )
 end
 
 function _M.test_uri( condition )
-    local uri = ngx.var.request_uri;
+    local uri = util.get_uri()
     return _M.test_var( condition['operator'], condition['value'], uri )
 end
 

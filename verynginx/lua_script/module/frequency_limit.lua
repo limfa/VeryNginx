@@ -35,7 +35,7 @@ function _M.filter()
             end
 
             if util.existed( rule['separate'], 'uri' ) then
-                key = key..'-'..ngx.var.uri
+                key = key..'-'.. util.get_uri()
             end
 
             local disabled = disabled_dict:get( key )
